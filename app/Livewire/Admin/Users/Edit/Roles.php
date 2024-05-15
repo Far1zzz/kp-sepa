@@ -23,6 +23,7 @@ class Roles extends Component
         $this->roleSelections = $this->user->roles->pluck('id')->toArray();
     }
 
+
     public function render(): View
     {
         $roles = Role::orderby('name')->get();
@@ -36,7 +37,7 @@ class Roles extends Component
             ->firstOrFail();
 
         //if admin role is not in array
-        if (! in_array(needle: $role->id, haystack: $this->roleSelections, strict: true)) {
+        if (!in_array(needle: $role->id, haystack: $this->roleSelections, strict: true)) {
             $adminRolesCount = User::role('admin')->count();
 
             //when there is only 1 admin role alert user and stop
@@ -72,7 +73,7 @@ class Roles extends Component
         $this->user->roles()->sync($rolesWithTenant);
 
         add_user_log([
-            'title' => 'updated '.$this->user->name."'s roles",
+            'title' => 'updated ' . $this->user->name . "'s roles",
             'reference_id' => $this->user->id,
             'link' => route('admin.users.edit', ['user' => $this->user->id]),
             'section' => 'Users',

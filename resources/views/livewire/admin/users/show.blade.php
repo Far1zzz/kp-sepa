@@ -1,8 +1,8 @@
 <div>
-   <p>
-       <x-a href="{{ route('admin.users.index') }}">{{ __('Users') }}</x-a>
-       <span class="dark:text-gray-200">- {{ $user->name }}</span>
-   </p>
+    <p>
+        <x-a href="{{ route('admin.users.index') }}">{{ __('Users') }}</x-a>
+        <span class="dark:text-gray-200">- {{ $user->name }}</span>
+    </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-4 lg:gap-6">
         <div>
@@ -14,10 +14,12 @@
                     @endif
                     <h2 class="mb-0">{{ $user->name }}</h2>
 
-                    @if(can('edit_users'))
-                        <p><x-a class="btn btn-primary" href="{{ route('admin.users.edit', $user) }}">{{ __('Edit') }}</x-a></p>
+                    @if (can('edit_users'))
+                        <p><x-a class="btn btn-primary"
+                                href="{{ route('admin.users.edit', $user) }}">{{ __('Edit') }}</x-a></p>
                     @elseif(auth()->id() === $user->id && can('edit_own_account'))
-                        <p><x-a class="btn btn-primary" href="{{ route('admin.users.edit', $user) }}">{{ __('Edit') }}</x-a></p>
+                        <p><x-a class="btn btn-primary"
+                                href="{{ route('admin.users.edit', $user) }}">{{ __('Edit') }}</x-a></p>
                     @endif
 
                 </div>
@@ -25,16 +27,16 @@
                 <div class="mt-5 text-left">
                     <div class="flex border-b pb-2">
                         <i class="pt-1 pr-1 fa fa-envelope"></i>
-                        <div style="width:200px; overflow: scroll">{{ $user->email }}</div>
+                        <div style="width:200px; overflow: hidden">{{ $user->email }}</div>
                     </div>
                 </div>
 
-           </div>
+            </div>
         </div>
 
         <div class="lg:col-span-3">
             @if (can('view_users_activity'))
-                <livewire:admin.users.activity :user="$user"/>
+                <livewire:admin.users.activity :user="$user" />
             @endif
         </div>
     </div>
